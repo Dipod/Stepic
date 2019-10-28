@@ -2,8 +2,8 @@
 using namespace std;
 int main()
 {
-	int firstClass, secondClass, thirdClass;
-    std::cin >> firstClass >> secondClass >> thirdClass;
-	std::cout << (firstClass + 1) / 2 + (secondClass + 1) / 2 + (thirdClass + 1) / 2;
+	int rub, cop, numberOfPattys;
+    std::cin >> rub >> cop >> numberOfPattys;
+	std::cout << (rub * 100 + cop) * numberOfPattys / 100 << " " << (rub * 100 + cop) * numberOfPattys % 100;
 	return 0;
 }
