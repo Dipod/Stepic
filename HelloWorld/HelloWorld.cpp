@@ -2,13 +2,8 @@
 using namespace std;
 int main()
 {
-	int Number, Hundreds, Dozens, Units;
+	int Number;
     std::cin >> Number;
-
-	Hundreds = Number / 100;
-	Dozens = Number / 10 % 10;
-	Units = Number % 10;
-
-	std::cout << Hundreds + Dozens + Units;
+	std::cout << (Number/2 + 1) * 2;
 	return 0;
 }
