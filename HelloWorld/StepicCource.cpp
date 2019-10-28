@@ -1,9 +1,17 @@
 ﻿#include <iostream>
+#include <iomanip>
 using namespace std;
 int main()
 {
-	int rub, cop, numberOfPattys;
-    std::cin >> rub >> cop >> numberOfPattys;
-	std::cout << (rub * 100 + cop) * numberOfPattys / 100 << " " << (rub * 100 + cop) * numberOfPattys % 100;
+	int seconds;
+	cin >> seconds;
+	seconds = seconds % 86400;
+	int hours = seconds / 3600;
+	seconds = seconds % 3600;
+	int minutes = seconds / 60;
+	seconds = seconds % 60;
+	cout << hours << ":";
+	cout.fill('0');
+	cout << setw(2) << minutes << ":" << setw(2) << seconds;
 	return 0;
 }
