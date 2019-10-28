@@ -4,6 +4,6 @@ int main()
 {
 	int Number;
     std::cin >> Number;
-	std::cout << Number / 10;
+	std::cout << Number / 10 % 10;
 	return 0;
 }
