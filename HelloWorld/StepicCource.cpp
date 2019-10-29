@@ -6,7 +6,7 @@ int main()
 	cin >> x1 >> y1 >> x2 >> y2;
 	int x_shift = (x2 - x1) * (x2 - x1);
 	int y_shift = (y2 - y1) * (y2 - y1);
-	if (x_shift == y_shift){
+	if (x_shift == y_shift || (x1 == x2 || y1 == y2)){
 		cout << "YES";
 	}
 	else {
