@@ -2,16 +2,16 @@
 using namespace std;
 int main()
 {
-	int firstNumber, secondNumber;
-	cin >> firstNumber >> secondNumber;
-	if (firstNumber > secondNumber){
-		cout << 1;
+	int firstNumber, secondNumber, thirdNumber;
+	cin >> firstNumber >> secondNumber >> thirdNumber;
+	if (firstNumber >= secondNumber && firstNumber >= thirdNumber){
+		cout << firstNumber;
 	}
-	else if (firstNumber == secondNumber){
-		cout << 0;
+	else if (secondNumber >= thirdNumber){
+		cout << secondNumber;
 	}
 	else {
-		cout << 2;
+		cout << thirdNumber;
 	}
 	return 0;
 }
