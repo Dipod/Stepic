@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{6CD08469-F84D-49A4-B55E-BC61CE462BE4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>HelloWorld</RootNamespace>
+    <RootNamespace>StepicCource</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>StepicCource</ProjectName>
   </PropertyGroup>
