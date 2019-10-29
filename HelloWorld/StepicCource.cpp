@@ -2,11 +2,15 @@
 using namespace std;
 int main()
 {
-	int V, T;
-	cin >> V >> T;
+	int Number;
+	cin >> Number;
 
-	int kilometersCount = V * T;
+	int leftPart = Number / 100;
+	int rightPart = Number % 100;
+	int dec = rightPart / 10;
+	int units = rightPart % 10;
+	rightPart = units * 10 + dec;
 
-	cout << (109 + (V * T) % 109) % 109;
+	cout << leftPart - rightPart + 1;
 	return 0;
 }
