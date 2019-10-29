@@ -2,16 +2,13 @@
 using namespace std;
 int main()
 {
-	int a, b, c;
-	cin >> a >> b >> c;
-	if (a == b && b == c){
-		cout << 3;
-	}
-	else if(a == b || b == c || a == c){
-		cout << 2;
+	int x1, y1, x2, y2;
+	cin >> x1 >> y1 >> x2 >> y2;
+	if (x1 == x2 || y1 == y2){
+		cout << "YES";
 	}
 	else {
-		cout << 0;
+		cout << "NO";
 	}
 	return 0;
 }
