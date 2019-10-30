@@ -1,20 +1,18 @@
-﻿//Яша плавал в бассейне размером N×M метров и устал.В этот момент он обнаружил, что находится на расстоянии X метров от одного из длинных бортиков(не обязательно от ближайшего) и Y метров от одного из коротких бортиков.Какое минимальное расстояние должен проплыть Яша, чтобы выбраться из бассейна на бортик ?
+﻿//Дано три числа.Упорядочите их в порядке неубывания.
 //Формат входных данных
-//Программа получает на вход числа N, M, X, Y.
+//Вводятся три числа.
 //Формат выходных данных
-//
-//Программа должна вывести число метров, которое нужно проплыть Яше до бортика.
+//Выведите ответ на задачу.
 //
 //Sample Input :
 //
-//	23
-//	52
-//	8
-//	43
+//	1
+//	2
+//	1
 //
 //Sample Output :
 //
-//	8
+//	1 1 2
 //
 //Напишите программу.Тестируется через stdin → stdout
 
@@ -22,38 +20,28 @@
 using namespace std;
 int main()
 {
-	int N, M, X, Y, longside, shortside, shortestX, shortestY;
-	cin >> N >> M >> X >> Y;
+	int firstNumber, secondNumber, thirdNumber, buffer;
+	cin >> firstNumber >> secondNumber >> thirdNumber;
 
-	if (N > M) {
-		longside = N;
-		shortside = M;
-	}
-	else {
-		longside = M;
-		shortside = N;
+	if (firstNumber > secondNumber) {
+		buffer = secondNumber;
+		secondNumber = firstNumber;
+		firstNumber = buffer;
 	}
 
-	if (X < shortside - X){
-		shortestX = X;
-	}
-	else{
-		shortestX = shortside - X;
-	}
-
-	if (Y < longside - Y) {
-		shortestY = Y;
-	}
-	else {
-		shortestY = longside - Y;
+	if (secondNumber > thirdNumber) {
+		buffer = thirdNumber;
+		thirdNumber = secondNumber;
+		secondNumber = buffer;
 	}
 
-	if (shortestX < shortestY) {
-		cout << shortestX;
+	if (firstNumber > secondNumber) {
+		buffer = secondNumber;
+		secondNumber = firstNumber;
+		firstNumber = buffer;
 	}
-	else {
-		cout << shortestY;
-	}
+
+	cout << firstNumber << " " << secondNumber << " " << thirdNumber;
 
 	return 0;
 }
