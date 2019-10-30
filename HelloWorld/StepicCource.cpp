@@ -1,45 +1,59 @@
-﻿//Шоколадка имеет вид прямоугольника, разделенного на N×M долек.Шоколадку можно один раз разломить по прямой на две части.Определите, можно ли таким образом отломить от шоколадки ровно K долек.
+﻿//Яша плавал в бассейне размером N×M метров и устал.В этот момент он обнаружил, что находится на расстоянии X метров от одного из длинных бортиков(не обязательно от ближайшего) и Y метров от одного из коротких бортиков.Какое минимальное расстояние должен проплыть Яша, чтобы выбраться из бассейна на бортик ?
 //Формат входных данных
-//Программа получает на вход три числа : N, M, K
+//Программа получает на вход числа N, M, X, Y.
 //Формат выходных данных
-//Программа должна вывести одно из двух слов : YES или NO.
 //
-//Sample Input 1 :
+//Программа должна вывести число метров, которое нужно проплыть Яше до бортика.
 //
-//	4
-//	2
-//	6
+//Sample Input :
 //
-//Sample Output 1:
+//	23
+//	52
+//	8
+//	43
 //
-//	YES
+//Sample Output :
 //
-//Sample Input 2 :
-//
-//	2
-//	10
-//	7
-//
-//Sample Output 2:
-//
-//	NO
+//	8
 //
 //Напишите программу.Тестируется через stdin → stdout
-//Time Limit : 1 секунда
-//Memory Limit : 256 MB
 
 #include <iostream>
 using namespace std;
 int main()
 {
-	int N, M, K;
-	cin >> N >> M >> K;
+	int N, M, X, Y, longside, shortside, shortestX, shortestY;
+	cin >> N >> M >> X >> Y;
 
-	if ((K % N == 0 || K % M == 0) && (K <= N * M)){
-		cout << "YES";
+	if (N > M) {
+		longside = N;
+		shortside = M;
+	}
+	else {
+		longside = M;
+		shortside = N;
+	}
+
+	if (X < shortside - X){
+		shortestX = X;
 	}
 	else{
-		cout << "NO";
+		shortestX = shortside - X;
 	}
+
+	if (Y < longside - Y) {
+		shortestY = Y;
+	}
+	else {
+		shortestY = longside - Y;
+	}
+
+	if (shortestX < shortestY) {
+		cout << shortestX;
+	}
+	else {
+		cout << shortestY;
+	}
+
 	return 0;
 }
