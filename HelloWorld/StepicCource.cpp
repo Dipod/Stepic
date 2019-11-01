@@ -10,21 +10,23 @@
 //	4
 //	2
 //	3
-//	0
+//Последовательность Фибоначчи определяется так :
 //
-//Sample Output 1:
+//F(0) = 0, F(1) = 1, …, F(n) = F(n−1) + F(n−2).
 //
-//	4
+//По данному числу N определите N - е число Фибоначчи F(N).
+//Формат входных данных
+//Вводится натуральное число N.
+//Формат выходных данных
+//Выведите ответ на задачу.
 //
-//Sample Input 2 :
+//Sample Input :
 //
-//	2
-//	1
-//	0
+//	6
 //
-//Sample Output 2:
+//Sample Output :
 //
-//	1
+//	8
 //
 //Напишите программу.Тестируется через stdin → stdout
 
@@ -33,19 +35,25 @@ using namespace std;
 
 int main()
 {
-	int N, max = -1, second = -1;
+	int N, F, counter = 2, Fm2 = 0, Fm1 = 1; //Fm2 = F(n-2); Fm1 = F(n-1)
 	cin >> N;
-	
-	while (N != 0) {
-		if (max <= N) {
-			second = max;
-			max = N;
-		}
-		if (second < N && N != max){
-			second = N;
-		}
-		cin >> N;
+
+	if (N == 0) {
+		cout << Fm2;
+		return 0;
 	}
-	cout << second;
+
+	if (N == 1) {
+		cout << Fm1;
+		return 0;
+	}
+	
+	while (counter <= N) {
+		F = Fm2 + Fm1;
+		Fm2 = Fm1;
+		Fm1 = F;
+		counter++;
+	}
+	cout << Fm1;
 	return 0;
 }
