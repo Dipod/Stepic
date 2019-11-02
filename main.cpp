@@ -1,41 +1,64 @@
-//Дана последовательность натуральных чисел x1, x2, ..., xn. Определите стандартное отклонение для данной последовательности натуральных чисел, завершающейся числом 0.
+//Дан многочлен P(x)=anxn + an−1xn−1+ … + a1x + a0 и число x. Вычислите значение этого многочлена, воспользовавшись схемой Горнера:
+//
+//  P(x)=(…(((anx + an−1)x + an−2)x + an−3) … )x+ a0
 //
 //Формат входных данных
-//Вводится последовательность натуральных чисел, оканчивающаяся числом 0 (само число 0 в последовательность не входит, а служит как признак ее окончания). В последовательности не менее двух чисел до 0.
+//Сначала программе подается на вход целое неотрицательное число n ≤ 20, затем действительное число x, затем следует n+1 вещественное число — коэффициенты многочлена от старшего к младшему.
 //Формат выходных данных
-//Выведите ответ на задачу.
+//Программа должна вывести значение многочлена.
 //
-//Sample Input:
+//Sample Input 1:
 //
 //  1
-//  7
-//  9
-//  0
+//  0.000
+//  1.000
+//  1.000
 //
-//Sample Output:
+//Sample Output 1:
 //
-//  4.16333199893
+//  1
+//
+//Sample Input 2:
+//
+//  2
+//  0.500
+//  1.000
+//  1.000
+//  1.000
+//
+//Sample Output 2:
+//
+//  1.75
 //
 //Напишите программу. Тестируется через stdin → stdout
 
 #include <iostream>
 #include <iomanip>
-#include <math.h>
 using namespace std;
 
 int main()
 {
-    int N, sum = 0, sumOfSquares = 0, counter = 0;
-    double deviation;
-    cin >> N;
+    int n, counter = 0;
+    double x, a, a2, result = 0.0;
+    cin >> n;
+    cin >> x;
 
-    while (N != 0) {
-        sum = sum + N;
-        sumOfSquares = sumOfSquares + N * N;
-        counter++;
-        cin >> N;
+    if(n == 0){
+        cin >> a;
+        cout << fixed << setprecision(6) << a;
+        return 0;
     }
-    deviation = sqrt((sumOfSquares - (double)sum * (double)sum / (double)counter) / (counter - 1));
-    cout << fixed << setprecision(6) << deviation;
+
+    while (counter < n) {
+        if (counter == 0){
+            cin >> a >> a2;
+            result = a * x + a2;
+        } else{
+            cin >> a;
+            result = result * x + a;
+        }
+        counter++;
+    }
+    cout << fixed << setprecision(6) << result;
     return 0;
 }
