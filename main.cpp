@@ -1,4 +1,4 @@
-﻿//Процентная ставка по вкладу составляет P процентов годовых, которые прибавляются к сумме вклада в конце года.Вклад составляет X рублей Y копеек.Определите размер вклада через год.
+//Процентная ставка по вкладу составляет P процентов годовых, которые прибавляются к сумме вклада в конце года.Вклад составляет X рублей Y копеек.Определите размер вклада через год.
 //
 //При решении этой задачи нельзя пользоваться условными инструкциями и циклами.
 //Формат входных данных
@@ -25,21 +25,21 @@ using namespace std;
 
 int main()
 {
-	int P, X, Y;
+    int P, X, Y;
 
-	cin >> P >> X >> Y;
+    cin >> P >> X >> Y;
 
-	double money, percentInYear;
+    double money, percentInYear;
 
-	money = (double)X + (double)Y / 100.0 + 0.000000001; //error compensation
-	percentInYear = (double)P / 100.0 + 1.0 + 0.000000001;
+    money = (double)X + (double)Y / 100.0 + 0.000000001; //error compensation
+    percentInYear = (double)P / 100.0 + 1.0 + 0.000000001;
 
-	money = money * percentInYear;
+    money = money * percentInYear;
 
-	X = trunc(money);
-	money = money - X;
-	Y = trunc(money * 100.0);
-	
-	cout << X << " " << Y;
-	return 0;
+    X = trunc(money);
+    money = money - X;
+    Y = trunc(money * 100.0);
+
+    cout << X << " " << Y;
+    return 0;
 }
