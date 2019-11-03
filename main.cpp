@@ -1,39 +1,21 @@
-//Известно, что на доске 8×8 можно расставить 8 ферзей так, чтобы они не били друг друга. Вам дана расстановка 8 ферзей на доске, определите, есть ли среди них пара бьющих друг друга.
+//N кеглей выставили в один ряд, занумеровав их слева направо числами от 1 до N. Затем по этому ряду бросили K шаров, при этом i-й шар сбил все кегли с номерами от li до ri включительно. Определите, какие кегли остались стоять на месте.
 //
 //Формат входных данных
-//Программа получает на вход восемь пар чисел, каждое число от 1 до 8 - координаты 8 ферзей.
+//
+//Программа получает на вход количество кеглей N и количество бросков K. Далее идет K пар чисел li, ri, при этом 1 ≤ li, ri ≤ N.
 //Формат выходных данных
-//Если ферзи не бьют друг друга, выведите слово NO, иначе выведите YES.
+//Программа должна вывести последовательность из N символов, где j-й символ есть “I”, если j-я кегля осталась стоять, или “.”, если j-я кегля была сбита.
 //
-//Sample Input 1:
+//Sample Input:
 //
-//    1 7
-//    2 4
-//    3 2
-//    4 8
-//    5 6
-//    6 1
-//    7 3
-//    8 5
-//
-//Sample Output 1:
-//
-//    NO
-//
-//Sample Input 2:
-//
-//    1 8
-//    2 7
+//    10 3
+//    8 10
+//    2 5
 //    3 6
-//    4 5
-//    5 4
-//    6 3
-//    7 2
-//    8 1
 //
-//Sample Output 2:
+//Sample Output:
 //
-//    YES
+//    I.....I...
 //
 //Напишите программу. Тестируется через stdin → stdout
 
@@ -41,31 +23,26 @@
 #include <vector>
 using namespace std;
 
-bool beatCheck(int x1, int y1, int x2, int y2)
-{
-    int x_shift = (x2 - x1) * (x2 - x1);
-    int y_shift = (y2 - y1) * (y2 - y1);
-    return x_shift == y_shift || (x1 == x2 || y1 == y2);
-}
-
 int main()
 {
-    vector <int> arrayX(8);
-    vector <int> arrayY(8);
-    //array input
-    for(int i = 0; i < 8; i++){
-        cin >> arrayX[i];
-        cin >> arrayY[i];
+    int N, K, li, ri;
+    cin >> N >> K;
+
+    //skittles initialisation
+    vector <char> skittles(N);
+    for(int i = 0; i < N; i++){
+        skittles[i] = 'I';
     }
-    //array processing
-    for(int j = 0; j < 8; j++){
-        for(int i = 0; i < 8; i++){
-            if(i != j && beatCheck(arrayX[j],arrayY[j],arrayX[i],arrayY[i])){
-                cout << "YES";
-                return 0;
-            }
+
+    for(int i = 0; i < K; i++){
+        cin >> li >> ri;
+        li--; ri--;
+        for(int j = li; j <= ri; j++){
+            skittles[j] = '.';
         }
     }
-    cout << "NO";
+    for(auto now : skittles){
+        cout << now;
+    }
     return 0;
 }
