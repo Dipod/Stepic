@@ -1,48 +1,38 @@
-//Выведите значение наименьшего нечетного элемента списка, а если в списке нет нечетных элементов - выведите число 0.
+//Дан список, упорядоченный по неубыванию элементов в нем. Определите, сколько в нем различных элементов.
 //
 //Формат входных данных
 //В первой строке вводится количество элементов в массиве. Во второй строке вводятся элементы массива.
 //Формат выходных данных
 //Выведите ответ на задачу.
 //
-//Sample Input 1:
+//Sample Input:
 //
-//    5
-//    0 1 2 3 4
+//    6
+//    1 2 2 3 3 3
 //
-//Sample Output 1:
+//Sample Output:
 //
-//    1
-//
-//Sample Input 2:
-//
-//    5
-//    2 4 6 8 10
-//
-//Sample Output 2:
-//
-//    0
+//    3
 //
 //Напишите программу. Тестируется через stdin → stdout
 
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 int main()
 {
-    int result = 0, temp, n;
+    int n, temp;
+    vector <int> array;
     cin >> n;
-    for(int i = 0; i < n; i++){
+    cin >> temp;
+    array.push_back(temp);
+
+    for(int i = 1; i < n; i++){
         cin >> temp;
-        if (temp % 2 != 0){
-            if(result == 0){
-                result = temp;
-            }
-            if(temp < result){
-                result = temp;
-            }
+        if(array.back() != temp){
+            array.push_back(temp);
         }
     }
-    cout << result;
+    cout << array.size();
 }
