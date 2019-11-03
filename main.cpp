@@ -1,64 +1,49 @@
-//Дан многочлен P(x)=anxn + an−1xn−1+ … + a1x + a0 и число x. Вычислите значение этого многочлена, воспользовавшись схемой Горнера:
-//
-//  P(x)=(…(((anx + an−1)x + an−2)x + an−3) … )x+ a0
+//Даны действительные коэффициенты a, b, c, при этом a ≠ 0 . Решите квадратное уравнение ax2 + bx + c = 0 и выведите все его корни.
 //
 //Формат входных данных
-//Сначала программе подается на вход целое неотрицательное число n ≤ 20, затем действительное число x, затем следует n+1 вещественное число — коэффициенты многочлена от старшего к младшему.
+//Вводятся три действительных числа.
 //Формат выходных данных
-//Программа должна вывести значение многочлена.
+//Если уравнение имеет два корня, выведите два корня в порядке возрастания, если один корень — выведите одно число, если нет корней — не выводите ничего.
 //
-//Sample Input 1:
+//Sample Input:
 //
-//  1
-//  0.000
-//  1.000
-//  1.000
+//    1
+//    -1
+//    -2
 //
-//Sample Output 1:
+//Sample Output:
 //
-//  1
-//
-//Sample Input 2:
-//
-//  2
-//  0.500
-//  1.000
-//  1.000
-//  1.000
-//
-//Sample Output 2:
-//
-//  1.75
+//    -1 2
 //
 //Напишите программу. Тестируется через stdin → stdout
 
 #include <iostream>
 #include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 int main()
 {
-    int n, counter = 0;
-    double x, a, a2, result = 0.0;
-    cin >> n;
-    cin >> x;
-
-    if(n == 0){
-        cin >> a;
-        cout << fixed << setprecision(6) << a;
-        return 0;
-    }
-
-    while (counter < n) {
-        if (counter == 0){
-            cin >> a >> a2;
-            result = a * x + a2;
-        } else{
-            cin >> a;
-            result = result * x + a;
-        }
-        counter++;
-    }
-    cout << fixed << setprecision(6) << result;
-    return 0;
+    double a, b, c, discr, x1, x2;
+    cin >> a >> b >> c;
+    cout << fixed << setprecision(6);
+    discr = b * b - 4 * a * c;
+     if(discr < 0){
+         return 0;
+     }else{
+         if(discr == 0){
+             x1 = -b / 2 * a;
+             cout << x1;
+         } else{
+             x1 = (-b + sqrt(discr)) / 2 * a;
+             x2 = (-b - sqrt(discr)) / 2 * a;
+             if(x1 <= x2){
+                 cout << x1 << " " << x2;
+             }else {
+                 cout << x2 << " " << x1;
+             }
+         }
+         return 0;
+     }
 }
