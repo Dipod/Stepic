@@ -1,18 +1,27 @@
-//Циклически сдвиньте элементы списка вправо (A[0] переходит на место A[1], A[1] на место A[2], ..., последний элемент переходит на место A[0]).
+//Дан массив чисел. Посчитайте, сколько в нем пар элементов, равных друг другу. Считается, что любые два элемента, равные друг другу образуют одну пару, которую необходимо посчитать.
 //
 //Формат входных данных
 //В первой строке вводится количество элементов в массиве. Во второй строке вводятся элементы массива.
 //Формат выходных данных
 //Выведите ответ на задачу.
 //
-//Sample Input:
+//Sample Input 1:
 //
 //    5
-//    1 2 3 4 5
+//    1 2 3 2 3
 //
-//Sample Output:
+//Sample Output 1:
 //
-//    5 1 2 3 4
+//    2
+//
+//Sample Input 2:
+//
+//    5
+//    1 1 1 1 1
+//
+//Sample Output 2:
+//
+//    10
 //
 //Напишите программу. Тестируется через stdin → stdout
 
@@ -22,21 +31,21 @@ using namespace std;
 
 int main()
 {
-    int n, temp;
-    vector <int> array;
+    int n, coupleCounter = 0;
     cin >> n;
+    vector <int> array(n);
     //array input
-    array.push_back(0);
     for(int i = 0; i < n; i++){
-        cin >> temp;
-        array.push_back(temp);
+        cin >> array[i];
     }
     //array processing
-    swap(array[0],array[n]);
-    array.pop_back();
-
-    //array output
-    for(auto now : array){
-        cout << now << " ";
+    for(int j = 0; j < n; j++){
+        for(int i = j + 1; i < n; i++){
+            if(array[j] == array[i]){
+                coupleCounter++;
+            }
+        }
     }
+    //array output
+    cout << coupleCounter;
 }
