@@ -1,4 +1,4 @@
-//Дан массив чисел. Посчитайте, сколько в нем пар элементов, равных друг другу. Считается, что любые два элемента, равные друг другу образуют одну пару, которую необходимо посчитать.
+//Дан массив. Выведите те его элементы, которые встречаются в массиве только один раз. Элементы нужно выводить в том порядке, в котором они встречаются в списке.
 //
 //Формат входных данных
 //В первой строке вводится количество элементов в массиве. Во второй строке вводятся элементы массива.
@@ -7,21 +7,21 @@
 //
 //Sample Input 1:
 //
-//    5
-//    1 2 3 2 3
+//    6
+//    1 2 2 3 3 3
 //
 //Sample Output 1:
 //
-//    2
+//    1
 //
 //Sample Input 2:
 //
-//    5
-//    1 1 1 1 1
+//    8
+//    4 3 5 2 5 1 3 5
 //
 //Sample Output 2:
 //
-//    10
+//    4 2 1
 //
 //Напишите программу. Тестируется через stdin → stdout
 
@@ -31,21 +31,30 @@ using namespace std;
 
 int main()
 {
-    int n, coupleCounter = 0;
+    int n;
+    bool unique = true;
     cin >> n;
     vector <int> array(n);
+    vector <int> result;
     //array input
     for(int i = 0; i < n; i++){
         cin >> array[i];
     }
     //array processing
     for(int j = 0; j < n; j++){
-        for(int i = j + 1; i < n; i++){
-            if(array[j] == array[i]){
-                coupleCounter++;
+        for(int i = 0; i < n; i++){
+            if(i != j && array[j] == array[i]){
+                unique = false;
+                break;
             }
         }
+        if(unique){
+            result.push_back(array[j]);
+        }
+        unique = true;
     }
     //array output
-    cout << coupleCounter;
+    for(auto now : result){
+        cout << now << " ";
+    }
 }
