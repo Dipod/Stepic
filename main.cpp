@@ -1,50 +1,52 @@
-//Найдите индексы первого вхождения максимального элемента.
-//Формат входных данных
-//
-//Программа получает на вход размеры массива n и m, затем n строк по m чисел в каждой. n и m не превышают 100.
-//Формат выходных данных
-//
-//Выведите два числа: номер строки и номер столбца, в которых стоит наибольший элемент в двумерном массиве. Если таких элементов несколько, то выводится тот, у которого меньше номер строки, а если номера строк равны то тот, у которого меньше номер столбца.
+//Дано нечетное число n, не превосходящее 15. Создайте двумерный массив из n×n элементов, заполнив его символами "." (каждый элемент массива является строкой из одного символа). Затем заполните символами "*" среднюю строку массива, средний столбец массива, главную диагональ и побочную диагональ. В результате "*" в массиве должны образовывать изображение звездочки. Выведите полученный массив на экран, разделяя элементы массива пробелами.
 //
 //Sample Input:
 //
-//    3 4
-//    0 3 2 4
-//    2 3 5 5
-//    5 1 2 3
+//    5
 //
 //Sample Output:
 //
-//    1 2
+//    * . * . *
+//    . * * * .
+//    * * * * *
+//    . * * * .
+//    * . * . *
 //
 //Напишите программу. Тестируется через stdin → stdout
 
 #include <iostream>
 using namespace std;
 
+bool beatCheck(int x1, int y1, int x2, int y2)
+{
+    int x_shift = (x2 - x1) * (x2 - x1);
+    int y_shift = (y2 - y1) * (y2 - y1);
+    return x_shift == y_shift || (x1 == x2 || y1 == y2);
+}
+
 int main()
 {
-    int columns, rows, colMax = 0, rowMax = 0, temp;
-    cin >> columns >> rows;
-    int array[100][100];
+    int n, centr;
+    cin >> n;
+    centr = n / 2;
+    char array[n][n];
     //array input
-    for(int col = 0; col < columns; col++){
-        for(int row = 0; row < rows; row++){
-            cin >> array[col][row];
-        }
-    }
-    //array processing
-    for(int col = 0; col < columns; col++){
-        for(int row = 0; row < rows; row++){
-            if(col == 0 && row == 0){
-                temp = array[col][row];
-            }else if(temp < array[col][row]){
-                temp = array[col][row];;
-                colMax = col;
-                rowMax = row;
+    for(int col = 0; col < n; col++){
+        for(int row = 0; row < n; row++){
+            if(beatCheck(centr,centr,col,row)){
+                array[col][row] = '*';
+            }else{
+                array[col][row] = '.';
             }
+
         }
     }
-    cout << colMax << " " << rowMax;
+    //array output
+    for(int col = 0; col < n; col++){
+        for(int row = 0; row < n; row++){
+                cout << array[col][row] << ' ';
+        }
+        cout << endl;
+    }
     return 0;
 }
