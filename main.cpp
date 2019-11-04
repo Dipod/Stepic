@@ -1,48 +1,50 @@
-//N кеглей выставили в один ряд, занумеровав их слева направо числами от 1 до N. Затем по этому ряду бросили K шаров, при этом i-й шар сбил все кегли с номерами от li до ri включительно. Определите, какие кегли остались стоять на месте.
-//
+//Найдите индексы первого вхождения максимального элемента.
 //Формат входных данных
 //
-//Программа получает на вход количество кеглей N и количество бросков K. Далее идет K пар чисел li, ri, при этом 1 ≤ li, ri ≤ N.
+//Программа получает на вход размеры массива n и m, затем n строк по m чисел в каждой. n и m не превышают 100.
 //Формат выходных данных
-//Программа должна вывести последовательность из N символов, где j-й символ есть “I”, если j-я кегля осталась стоять, или “.”, если j-я кегля была сбита.
+//
+//Выведите два числа: номер строки и номер столбца, в которых стоит наибольший элемент в двумерном массиве. Если таких элементов несколько, то выводится тот, у которого меньше номер строки, а если номера строк равны то тот, у которого меньше номер столбца.
 //
 //Sample Input:
 //
-//    10 3
-//    8 10
-//    2 5
-//    3 6
+//    3 4
+//    0 3 2 4
+//    2 3 5 5
+//    5 1 2 3
 //
 //Sample Output:
 //
-//    I.....I...
+//    1 2
 //
 //Напишите программу. Тестируется через stdin → stdout
 
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main()
 {
-    int N, K, li, ri;
-    cin >> N >> K;
-
-    //skittles initialisation
-    vector <char> skittles(N);
-    for(int i = 0; i < N; i++){
-        skittles[i] = 'I';
-    }
-
-    for(int i = 0; i < K; i++){
-        cin >> li >> ri;
-        li--; ri--;
-        for(int j = li; j <= ri; j++){
-            skittles[j] = '.';
+    int columns, rows, colMax = 0, rowMax = 0, temp;
+    cin >> columns >> rows;
+    int array[100][100];
+    //array input
+    for(int col = 0; col < columns; col++){
+        for(int row = 0; row < rows; row++){
+            cin >> array[col][row];
         }
     }
-    for(auto now : skittles){
-        cout << now;
+    //array processing
+    for(int col = 0; col < columns; col++){
+        for(int row = 0; row < rows; row++){
+            if(col == 0 && row == 0){
+                temp = array[col][row];
+            }else if(temp < array[col][row]){
+                temp = array[col][row];;
+                colMax = col;
+                rowMax = row;
+            }
+        }
     }
+    cout << colMax << " " << rowMax;
     return 0;
 }
