@@ -1,4 +1,4 @@
-//По введенному символу определите, является ли он цифрой.
+//Переведите символ в верхний регистр.
 //
 //Входные данные
 //
@@ -6,37 +6,37 @@
 //
 //Выходные данные
 //
-//Выведите "yes", если символ является цифрой и "no" в противном случае. Обратите внимание, что слова нужно выводить маленькими буквами.
+//Если введеный символ является строчной буквой латинского алфавита, то выведите такую же заглавную букву. В противном случае выведите тот же символ, который был введен.
 //
-//Sample Input 1:
+//Sample Input:
 //
-//    1
+//    b
 //
-//Sample Output 1:
+//Sample Output:
 //
-//    yes
-//
-//Sample Input 2:
-//
-//    a
-//
-//Sample Output 2:
-//
-//no
+//    B
 //
 //Напишите программу. Тестируется через stdin → stdout
 
 #include <iostream>
 using namespace std;
 
-bool IsNumber(char a){
-    return a >= '0' && a <= '9';
+bool IsLowercaseLetter(char a){
+    return a >= 'a' && a <= 'z';
+}
+
+char uppercase(char a){
+    if (IsLowercaseLetter(a)){
+        return 'A' + (a - 'a');
+    }else{
+        return a;
+    }
 }
 
 int main()
 {
     char a;
     cin >> a;
-    cout << (IsNumber(a) ? "yes" : "no");
+    cout << uppercase(a);
     return 0;
 }
