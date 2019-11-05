@@ -1,57 +1,46 @@
-//Дан прямоугольный массив размером n×m. Поверните его на 90 градусов по часовой стрелке, записав результат в новый массив размером m×n.
+//По данным числам n и m заполните двумерный массив размером n×m числами от 1 до n×m “змейкой”, как показано в примере.
 //Формат входных данных
-//Вводятся два числа n и m, не превосходящие 100, затем массив размером n×m.
+//Вводятся два числа n и m, каждое из которых не превышает 30.
 //Формат выходных данных
 //
-//Выведите получившийся массив. Числа при выводе разделяйте одним пробелом.
+//Выведите полученный массив, отводя на вывод каждого элемента ровно 4 символа.
 //
 //Sample Input:
 //
-//3 4
-//11 12 13 14
-//21 22 23 24
-//31 32 33 34
+//  3 5
 //
 //Sample Output:
 //
-//31 21 11
-//32 22 12
-//33 23 13
-//34 24 14
+//   1   2   3   4   5
+//  10   9   8   7   6
+//  11  12  13  14  15
 //
 //Напишите программу. Тестируется через stdin → stdout
 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main()
 {
-    int n, m;
+    int n, m, counter = 1;
     cin >> n >> m;
     int array[n][m];
-    int temp[m][n];
-    int result[m][n];
     //array input
     for(int col = 0; col < n; col++){
         for(int row = 0; row < m; row++){
-            cin >> array[col][row];
-        }
-    }
-    //array processing
-    for(int col = 0; col < n; col++){
-        for(int row = 0; row < m; row++){
-            temp[row][col] = array[col][row];
-        }
-    }
-    for(int col = 0; col < m; col++){
-        for(int row = 0; row < n; row++){
-            result[col][row] = temp[col][n - 1 - row];
+            if(col % 2 == 0){
+                array[col][row] = counter;
+            }else{
+                array[col][m - 1 - row] = counter;
+            }
+            counter++;
         }
     }
     //array output
-    for(int col = 0; col < m; col++){
-        for(int row = 0; row < n; row++){
-            cout << result[col][row] << ' ';
+    for(int col = 0; col < n; col++){
+        for(int row = 0; row < m; row++){
+            cout << setw(3) << array[col][row] << ' ';
         }
         cout << endl;
     }
