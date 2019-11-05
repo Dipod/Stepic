@@ -1,4 +1,4 @@
-//Даны числа n и m. Заполните массив размером n × m в шахматном порядке: клетки одного цвета заполнены нулями, а другого цвета - заполнены числами натурального ряда сверху вниз, слева направо. В левом верхнем углу записано число 1.
+//По данным числам n и m заполните двумерный массив размером n×m числами от 1 до n×m по спирали, выходящей из левого верхнего угла и закрученной по часовой стрелке, как показано в примере.
 //Формат входных данных
 //
 //Вводятся два числа n и m, не превышающие 100.
@@ -8,13 +8,14 @@
 //
 //Sample Input:
 //
-//    3 5
+//    4 5
 //
 //Sample Output:
 //
-//    1   0   2   0   3
-//    0   4   0   5   0
-//    6   0   7   0   8
+//     1   2   3   4   5
+//    14  15  16  17   6
+//    13  20  19  18   7
+//    12  11  10   9   8
 //
 //Напишите программу. Тестируется через stdin → stdout
 
@@ -24,22 +25,64 @@ using namespace std;
 
 int main()
 {
-    int n, m, counter = 1, mainCounter = 0;
+    int n, m, col = 0, row = 0, step = 1; //step == 1 -> left to right; step == 2 -> up to down; step == 3 -> right to left; step == 4 -> down to up
     cin >> n >> m;
-    int array[n][m];
+    int array[100][100] = {0};
     //array input
-    for(int col = 0; col < n; col++){
-        for(int row = 0; row < m; row++){
-            if(mainCounter % 2 == 0){
-                array[col][row] = counter;
-                counter++;
-            }else{
-                array[col][row] = 0;
+    for(int counter = 1; counter <= n * m; counter++){
+        switch(step){
+            case 1: {
+                if (array[col][row] != 0 || row == m){
+                    row--;
+                    col++;
+                    step = 2;
+                    counter--;
+                }else{
+                    array[col][row] = counter;
+                    row++;
+                }
+                break;
             }
-            mainCounter++;
-        }
-        if(m % 2 == 0){
-            mainCounter++;
+            case 2: {
+                if (array[col][row] != 0 || col == n){
+                    row--;
+                    col--;
+                    step = 3;
+                    counter--;
+                }else{
+                    array[col][row] = counter;
+                    col++;
+                }
+                break;
+            }
+            case 3: {
+                if (row == -1 || array[col][row] != 0 ){
+                    row++;
+                    col--;
+                    step = 4;
+                    counter--;
+                }else{
+                    array[col][row] = counter;
+                    row--;
+                }
+                break;
+            }
+            case 4: {
+                if (col == -1 || array[col][row] != 0 ){
+                    col++;
+                    row++;
+                    step = 1;
+                    counter--;
+                }else{
+                    array[col][row] = counter;
+                    col--;
+                }
+                break;
+            }
+            default: {
+                cout << "switch case error!";
+                return 0;
+            }
         }
     }
     //array output
