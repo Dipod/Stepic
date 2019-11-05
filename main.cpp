@@ -1,37 +1,36 @@
-//Напишите функцию min(a, b), вычисляющую минимум двух чисел. Затем напишите функцию min4(a, b, c, d), вычисляющую минимум 4 чисел с помощью функции min. Считайте четыре целых числа и выведите их минимум.
+//Даны четыре действительных числа: x1, y1, x2, y2. Напишите функцию distance(x1, y1, x2, y2), вычисляющую расстояние между точкой (x1. y1) и (x2, y2). Считайте четыре действительных числа и выведите результат работы этой функции.
 //Формат входных данных
-//Вводятся четыре целых числа.
+//Вводятся четыре действительных числа.
 //Формат выходных данных
 //Выведите ответ на задачу.
 //
 //Sample Input:
 //
-//    4
-//    5
-//    6
-//    7
+//    0
+//    0
+//    1
+//    1
 //
 //Sample Output:
 //
-//    4
+//    1.41421
 //
 //Напишите программу. Тестируется через stdin → stdout
 
 #include <iostream>
+#include <cmath>
+#include <iomanip>
+
 using namespace std;
 
-int min(int a, int b){
-    return a < b ? a : b;
-}
-
-int min4(int a, int b, int c, int d){
-    return min(min(a,b),min(c,d));
+double distance(double x1, double y1, double x2, double y2){
+    return sqrt(pow(x2 - x1,2) + pow(y2 - y1,2));
 }
 
 int main()
 {
-    int a, b, c, d;
-    cin >> a >> b >> c >> d;
-    cout << min4(a,b,c,d);
+    double x1, y1, x2, y2;
+    cin >> x1 >> y1 >> x2 >> y2;
+    cout << setprecision(6) << distance(x1,y1,x2,y2);
     return 0;
 }
