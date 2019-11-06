@@ -74,7 +74,7 @@ int main()
     }
 
     for(auto now : arrayOfSubstrings){
-        if (now == "" || now.size() > 4){
+        if (now == "" || now.size() > 3){
             cout << "NO";
             return 0;
         }
