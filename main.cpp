@@ -50,12 +50,12 @@ bool participantComparator(const participant a1, const participant a2){
         return a1.indexNumber < a2.indexNumber;
     }
     return a1.points > a2.points;
-};
+}
 
 using namespace std;
 int main()
 {
-    int n, temp = 0;
+    int n;
     cin >> n;
     vector <participant> participants(n);
 
