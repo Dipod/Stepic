@@ -1,55 +1,65 @@
-//Выведите все исходные точки в порядке возрастания их расстояний от начала координат.
+//Выведите фамилии и имена учащихся в порядке убывания их среднего балла.
 //
 //Входные данные
 //
-//Программа получает на вход набор точек на плоскости. Сначала задано количество точек n, затем идет последовательность из n строк, каждая из которых содержит два числа: координаты точки. Величина n не превосходит 100, все исходные координаты – целые числа, не превосходящие 103.
+//Заданы сначала количество учащихся n, затем n строк, каждая из которых содержит фамилию, имя и три числа (оценки по трем предметам: математике, физике, информатике). Данные в строке разделены одним пробелом. Оценки принимают значение от 1 до 5.
 //
 //Выходные данные
 //
-//Необходимо вывести все исходные точки в порядке возрастания их расстояний от начала координат.
+//Необходимо вывести пары фамилия-имя по одной на строке, разделяя фамилию и имя одним пробелом. Выводить оценки не нужно. Если несколько учащихся имеют одинаковые средние баллы, то их нужно выводить в порядке, заданном во входных данных.
 //
 //Sample Input:
 //
-//    2
-//    1 2
-//    2 3
+//    3
+//    Markov Valeriy 5 5 5
+//    Sergey Petrov 1 1 1
+//    Petrov Petr 3 3 3
 //
 //Sample Output:
 //
-//    1 2
-//    2 3
+//    Markov Valeriy
+//    Petrov Petr
+//    Sergey Petrov
 //
 //Напишите программу. Тестируется через stdin → stdout
 
 #include <iostream>
 #include <algorithm>
 #include <vector>
-
-struct point{
-    int x = 0;
-    int y = 0;
-};
-
-bool pointComparator(const point a1, const point a2){
-    return a1.x * a1.x + a1.y * a1.y < a2.x * a2.x + a2.y * a2.y;
-}
+#include <string>
 
 using namespace std;
+
+struct student{
+    string lastName = "";
+    string firstName = "";
+    int mathPoints = 0;
+    int physicsPoints = 0;
+    int compSciencePoints = 0;
+};
+
+bool studentComparator(const student a1, const student a2){
+    return a1.mathPoints + a1.physicsPoints + a1.compSciencePoints > a2.mathPoints + a2.physicsPoints + a2.compSciencePoints;
+}
+
 int main()
 {
     int n;
     cin >> n;
-    vector <point> points(n);
+    vector <student> students(n);
 
     for(int i = 0; i < n; i++){
-        cin >> points[i].x;
-        cin >> points[i].y;
+        cin >> students[i].lastName;
+        cin >> students[i].firstName;
+        cin >> students[i].mathPoints;
+        cin >> students[i].physicsPoints;
+        cin >> students[i].compSciencePoints;
     }
 
-    sort(points.begin(),points.end(),pointComparator);
+    stable_sort(students.begin(),students.end(),studentComparator);
 
-    for(auto now : points){
-        cout << now.x << " " << now.y << endl;
+    for(auto now : students){
+        cout << now.lastName << " " << now.firstName << endl;
     }
     return 0;
 }
