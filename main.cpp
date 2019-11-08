@@ -1,38 +1,23 @@
-//Во время проведения олимпиады каждый из участников получил свой идентификационный номер – натуральное число. Необходимо отсортировать список участников олимпиады по количеству набранных ими баллов.
+//Выведите все исходные точки в порядке возрастания их расстояний от начала координат.
 //
 //Входные данные
 //
-//На первой строке дано число N (1 ≤ N ≤ 1000) – количество участников. На каждой следующей строке даны идентификационный номер и набранное число баллов соответствующего участника. Все числа во входном файле не превышают 105.
+//Программа получает на вход набор точек на плоскости. Сначала задано количество точек n, затем идет последовательность из n строк, каждая из которых содержит два числа: координаты точки. Величина n не превосходит 100, все исходные координаты – целые числа, не превосходящие 103.
 //
 //Выходные данные
 //
-//В выходной файл выведите исходный список в порядке убывания баллов. Если у некоторых участников одинаковые баллы, то их между собой нужно упорядочить в порядке возрастания идентификационного номера.
+//Необходимо вывести все исходные точки в порядке возрастания их расстояний от начала координат.
 //
-//Sample Input 1:
+//Sample Input:
 //
-//    3
-//    101 80
-//    305 90
-//    200 14
+//    2
+//    1 2
+//    2 3
 //
-//Sample Output 1:
+//Sample Output:
 //
-//    305 90
-//    101 80
-//    200 14
-//
-//Sample Input 2:
-//
-//    3
-//    20 80
-//    30 90
-//    25 90
-//
-//Sample Output 2:
-//
-//    25 90
-//    30 90
-//    20 80
+//    1 2
+//    2 3
 //
 //Напишите программу. Тестируется через stdin → stdout
 
@@ -40,16 +25,13 @@
 #include <algorithm>
 #include <vector>
 
-struct participant{
-    int indexNumber = 0;
-    int points = 0;
+struct point{
+    int x = 0;
+    int y = 0;
 };
 
-bool participantComparator(const participant a1, const participant a2){
-    if(a1.points == a2.points){
-        return a1.indexNumber < a2.indexNumber;
-    }
-    return a1.points > a2.points;
+bool pointComparator(const point a1, const point a2){
+    return a1.x * a1.x + a1.y * a1.y < a2.x * a2.x + a2.y * a2.y;
 }
 
 using namespace std;
@@ -57,17 +39,17 @@ int main()
 {
     int n;
     cin >> n;
-    vector <participant> participants(n);
+    vector <point> points(n);
 
     for(int i = 0; i < n; i++){
-        cin >> participants[i].indexNumber;
-        cin >> participants[i].points;
+        cin >> points[i].x;
+        cin >> points[i].y;
     }
 
-    sort(participants.begin(),participants.end(),participantComparator);
+    sort(points.begin(),points.end(),pointComparator);
 
-    for(auto now : participants){
-        cout << now.indexNumber << " " << now.points << endl;
+    for(auto now : points){
+        cout << now.x << " " << now.y << endl;
     }
     return 0;
 }
