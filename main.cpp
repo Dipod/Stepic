@@ -1,74 +1,43 @@
-//Дано число N. Определите, сколькими способами можно расставить на доске N×N N ферзей, не бьющих друг друга.
+//В небоскребе n этажей. Известно, что если уронить стеклянный шарик с этажа номер p, и шарик разобьется, то если уронить шарик с этажа номер p+1, то он тоже разобьется. Также известно, что при броске с последнего этажа шарик всегда разбивается.Вы хотите определить минимальный номер этажа, при падении с которого шарик разбивается. Для проведения экспериментов у вас есть два шарика. Вы можете разбить их все, но в результате вы должны абсолютно точно определить этот номер.
+//Определите, какого числа бросков достаточно, чтобы заведомо решить эту задачу.
 //Формат входных данных
-//
-//Задано единственное число N. (N ≤ 10)
+//Программа получает на вход количество этажей в небоскребе.
 //Формат выходных данных
-//Выведите ответ на задачу.
-//Подсказка
-//Напишите рекурсивную функцию, которая пытается поставить ферзя в очередной столбец. Если на эту клетку ставить ферзя нельзя (он бьет предыдущих), то такой вариант даже не стоит рассматривать. Когда вы успешно поставили ферзя в последний столбец - увеличивайте счетчик.
+//Требуется вывести наименьшее число бросков, при котором можно всегда решить задачу.
+//Примечание
+//Комментарий к первому примеру. Нужно бросить шарик со 2-го этажа. Если он разобьется, то бросим второй шарик с 1-го этажа, а если не разобьется - то бросим шарик с 3-го этажа.
+//Подсказки
+//1. Как следует действовать, если шарик был бы только один?
+//2. Пусть шариков два и мы бросили один шарик с этажа номер k. Как мы будем действовать в зависимости от того, разобьется ли шарик или нет?
+//3. Пусть f(n) - это минимальное число бросков, за которое можно определить искомый этаж, если бы в небоскребе было n этажей. Выразите f(n) через значения f(a) для меньших значений a.
 //
-//Sample Input:
+//Sample Input 1:
 //
-//    8
+//4
 //
-//Sample Output:
+//Sample Output 1:
 //
-//    92
+//2
+//
+//Sample Input 2:
+//
+//5
+//
+//Sample Output 2:
+//
+//3
 //
 //Напишите программу. Тестируется через stdin → stdout
 
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
-struct queenCoordinate{
-    int x = 0;
-    int y = 0;
-};
-
-bool beatCheck(queenCoordinate a1, queenCoordinate a2)
-{
-    int x_shift = (a2.x - a1.x) * (a2.x - a1.x);
-    int y_shift = (a2.y - a1.y) * (a2.y - a1.y);
-    return x_shift == y_shift || (a1.x == a2.x || a1.y == a2.y);
-}
-
-int solve(vector <queenCoordinate> queenCoordinates, int n, int currentRow){
-    int result = 0;
-    queenCoordinate temp;
-    temp.x = currentRow;
-    for(int col = 1; col <= n; col++){
-        bool badAccommodation = false;
-        temp.y = col;
-        for(auto now : queenCoordinates){
-            if(!badAccommodation){
-                badAccommodation = beatCheck(now,temp);
-            }else{
-                break;
-            }
-        }
-        if(!badAccommodation){
-            if(currentRow == n){
-                result++;
-            }else{
-                vector <queenCoordinate> childQueenCoordinates;
-                childQueenCoordinates = queenCoordinates;
-                childQueenCoordinates.push_back(temp);
-                result += solve(childQueenCoordinates, n, currentRow + 1);
-            }
-        }
-    }
-    return result;
-}
-
 int main()
 {
-    int n = 0;
+    int n = 0, m = 0;
     cin >> n;
-    vector <queenCoordinate> queenCoordinates;
-
-    cout << solve(queenCoordinates, n, 1);
-
-    return 0;
+    n = (n - 1) * 2;
+    for(m; m + m*m < n; m++){}
+    cout << m;
 }
